@@ -1,6 +1,6 @@
 pID = "Custom_Cards"
 version = '1.00'
-UPDATE_URL=''
+UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
   enc = Global.getVar('Encoder')
