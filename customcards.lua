@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.5'
+version = '1.0.6'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -113,7 +113,7 @@ function generateManaDecals(str, obj)
             local startRange = i
             local endRange = i -- start recording range
             while unfManaCosts[i] ~= ")" do
-                if i < #unfManaCosts + 1 then error("You must close that parenthesis in the mana cost!") return end
+                if i > #unfManaCosts + 1 then error("You must close that parenthesis starting at position "..startRange.." in the mana cost!") return end
                 i = i + 1
             end
             endRange = i - 1 -- back up one, so it doesn't select the close parenthesis
@@ -226,11 +226,11 @@ colorURLs = {
     BR = "https://cdn.discordapp.com/attachments/947638127160336445/996802743891144784/mana_br.png", -- Black/Red     
     RB = "https://cdn.discordapp.com/attachments/947638127160336445/996802743891144784/mana_br.png", -- Red/Black     
 
-    PW = "https://cdn.discordapp.com/attachments/947638127160336445/996802416114675792/mana_phyw.png", -- Phyrexian White
-    PU = "https://cdn.discordapp.com/attachments/947638127160336445/996802415913345065/mana_phyu.png", -- Phyrexian Blue
-    PB = "https://cdn.discordapp.com/attachments/947638127160336445/996802416332771328/mana_phyb.png", -- Phyrexian Black
-    PR = "https://cdn.discordapp.com/attachments/947638127160336445/996802415707836517/mana_phyr.png", -- Phyrexian Red
-    PG = "https://cdn.discordapp.com/attachments/947638127160336445/996802416605409330/mana_phyg.png"  -- Phyrexian Green
+    PW = "https://cdn.discordapp.com/attachments/947638127160336445/996842222475542538/mana_phyw.png", -- Phyrexian White, Colorblind Tweak Thanks Adi
+    PU = "https://cdn.discordapp.com/attachments/947638127160336445/996842223033389096/mana_phyu.png", -- Phyrexian Blue, Colorblind Tweak 
+    PB = "https://cdn.discordapp.com/attachments/947638127160336445/996842222181961902/mana_phyb.png", -- Phyrexian Black, Colorblind Tweak 
+    PR = "https://cdn.discordapp.com/attachments/947638127160336445/996842223297642496/mana_phyr.png", -- Phyrexian Red, Colorblind Tweak 
+    PG = "https://cdn.discordapp.com/attachments/947638127160336445/996842221863186443/mana_phyg.png"  -- Phyrexian Green, Colorblind Tweak 
 }
 -- add these ones separately because Lua doesn't like to let you declare them NORMALLY
 colorURLs["2W"] = "https://cdn.discordapp.com/attachments/947638127160336445/996802297189372045/2W.png"
