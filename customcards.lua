@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.6'
+version = '1.0.7'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -53,15 +53,24 @@ function createButtons(t) --The encoder calls this when
       local dataTitle = {click_function = "updateButtonLabels", function_owner = o, label = o.getName(), position = {0, 0.4, -1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 125, font_color = textColor}
       local dataDescription = {click_function = "updateButtonLabels", function_owner = o, label = outstring[7], position = {0, 0.4, 0.85}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 90, font_color = textColor}
       local typeLine = {click_function = "updateButtonLabels", function_owner = o, label = outstring[3], position = {0, 0.4, 0.275}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 85, font_color = textColor}
-      local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = {0.735, 0.4, 1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = textColor}
-      --local manaCost = {click_function = "updateButtonLabels", function_owner = self, label = outstring[1], position = {0.43, 0.64, -1.1}, scale = {0.5, 0.5, 0.5}, width = 1000, height = 200, font_size = 125, color = {0.74,0.63,0.56}}
       local scryber = {click_function = "recordName", function_owner = self, label = o.getGMNotes(), position = {-0.43, 0.4, 1.43}, scale = {0.5, 0.5, 0.5}, width = 400, height = 80, font_size = 50, font_color = {1,1,1}, color = {0,0,0}}
       o.createButton(dataTitle)
       o.createButton(dataDescription)
       o.createButton(typeLine)
-      --o.createButton(manaCost)
-      o.createButton(powerToughness)
       o.createButton(scryber)
+      
+      -- DS: Hi I'm invading this function as well lol
+
+      -- old mana cost display system
+      --local manaCost = {click_function = "updateButtonLabels", function_owner = self, label = outstring[1], position = {0.43, 0.64, -1.1}, scale = {0.5, 0.5, 0.5}, width = 1000, height = 200, font_size = 125, color = {0.74,0.63,0.56}}
+      --o.createButton(manaCost)
+      
+      -- fixing to make sure power/toughness doesn't draw over an already-existing power/toughness meter (_MTG_Simplified_UNIFIED)
+      local ptData = enc.call("APIobjIsPropEnabled", {obj = o, propID = "_MTG_Simplified_UNIFIED"})
+      if not (ptData ~= nil and ptData.displayPowTou) then
+        local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = {0.735, 0.4, 1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = textColor}
+        o.createButton(powerToughness)
+      end
 
       generateManaDecals(outstring[1], o)
     end
@@ -238,3 +247,23 @@ colorURLs["2U"] = "https://cdn.discordapp.com/attachments/947638127160336445/996
 colorURLs["2B"] = "https://cdn.discordapp.com/attachments/947638127160336445/996802296358916147/2B.png"
 colorURLs["2R"] = "https://cdn.discordapp.com/attachments/947638127160336445/996802296790917171/2R.png"
 colorURLs["2G"] = "https://cdn.discordapp.com/attachments/947638127160336445/996802296585388113/2G.png"
+
+function updateModule(wr)
+  enc = Global.getVar('Encoder')
+  if enc ~= nil then
+    wr = wr.text
+    wrv = string.match(wr,"version = '(.-)'")
+    if wrv == 'DEPRECIATED' then
+      enc.call("APIremoveProperty",{propID=pID})
+      self.destruct()
+    end
+    local ver = enc.call("APIversionComp",{wv=wrv,cv=version})
+    if ''..ver ~= ''..version then
+      broadcastToAll("An update has been found for "..pID..". Reloading Module.")
+      self.script_code = wr
+      self.reload()
+    else
+      broadcastToAll("No update found for "..pID..". Carry on.")
+    end
+  end
+end
