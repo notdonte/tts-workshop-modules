@@ -154,7 +154,7 @@ function generateManaDecals(str, obj)
     local posHolder = {0, 0, 0}
     for i,v in ipairs(fManaCosts) do
         if tonumber(v) ~= nil then break end
-        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.45, z = -1.1}
+        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.65, z = -1.1}
         table.insert(decals, {
             name = "MagiscryptionManaCount",
             url = colorURLs[v] or colorURLs["C"], -- default to colorless icon as fallback
@@ -170,11 +170,11 @@ function generateManaDecals(str, obj)
             click_function = "updateButtonLabels",
             function_owner = self,
             label = fManaCosts[#fManaCosts], -- grabs the last string in fManaCosts, which SHOULD be the colorless cost
-            position = {0.8 - 0.15 * manaCount, 0.45, -1.1},
+            position = {0.8 - 0.15 * manaCount, 0.65, -1.1},
             scale = {0.5, 0.5, 0.5},
             width = 200, height = 200,
             font_size = 125,
-            color = {0.74,0.63,0.56}
+            color = {0.79,0.77,0.75}
         })
     end
 end
@@ -191,7 +191,7 @@ colorSorting = {
 }
 
 colorURLs = {
-    x = "https://cdn.discordapp.com/attachments/947638127160336445/996637570597408858/mana_x.png",
+    X = "https://cdn.discordapp.com/attachments/947638127160336445/996637570597408858/mana_x.png",
     S = "https://cdn.discordapp.com/attachments/947638127160336445/996600989878591548/mana_s.png",
     C = "https://cdn.discordapp.com/attachments/947638127160336445/996598869758591098/mana_c.png",
     W = "https://cdn.discordapp.com/attachments/947638127160336445/996598046181818378/mana_w.png",
