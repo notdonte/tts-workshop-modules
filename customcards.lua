@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.3'
+version = '1.0.4'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -113,6 +113,7 @@ function generateManaDecals(str, obj)
             local startRange = i
             local endRange = i -- start recording range
             while unfManaCosts[i] ~= ")" do
+                if i < #unfManaCosts + 1 then error("You must close that parenthesis in the mana cost!") return end
                 i = i + 1
             end
             endRange = i - 1 -- back up one, so it doesn't select the close parenthesis
@@ -154,7 +155,7 @@ function generateManaDecals(str, obj)
     local posHolder = {0, 0, 0}
     for i,v in ipairs(fManaCosts) do
         if tonumber(v) ~= nil then break end
-        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.65, z = -1.1}
+        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.45, z = -1.1}
         table.insert(decals, {
             name = "MagiscryptionManaCount",
             url = colorURLs[v] or colorURLs["C"], -- default to colorless icon as fallback
@@ -170,7 +171,7 @@ function generateManaDecals(str, obj)
             click_function = "updateButtonLabels",
             function_owner = self,
             label = fManaCosts[#fManaCosts], -- grabs the last string in fManaCosts, which SHOULD be the colorless cost
-            position = {0.8 - 0.15 * manaCount, 0.65, -1.1},
+            position = {0.8 - 0.15 * manaCount, 0.45, -1.1},
             scale = {0.5, 0.5, 0.5},
             width = 200, height = 200,
             font_size = 125,
@@ -180,7 +181,9 @@ function generateManaDecals(str, obj)
 end
 
 colorSorting = {
-    X = -1,
+    X = -3,
+    Y = -2,
+    Z = -1,
     S = 0,
     C = 1,
     W = 2,
@@ -192,6 +195,8 @@ colorSorting = {
 
 colorURLs = {
     X = "https://cdn.discordapp.com/attachments/947638127160336445/996637570597408858/mana_x.png",
+    Y = "https://cdn.discordapp.com/attachments/947638127160336445/996799334395936888/mana_y.png",
+    Z = "https://cdn.discordapp.com/attachments/947638127160336445/996799334186233906/mana_z.png",
     S = "https://cdn.discordapp.com/attachments/947638127160336445/996600989878591548/mana_s.png",
     C = "https://cdn.discordapp.com/attachments/947638127160336445/996598869758591098/mana_c.png",
     W = "https://cdn.discordapp.com/attachments/947638127160336445/996598046181818378/mana_w.png",
