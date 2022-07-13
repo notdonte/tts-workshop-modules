@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.7'
+version = '1.0.8'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -67,7 +67,7 @@ function createButtons(t) --The encoder calls this when
       
       -- fixing to make sure power/toughness doesn't draw over an already-existing power/toughness meter (_MTG_Simplified_UNIFIED)
       local ptData = enc.call("APIobjIsPropEnabled", {obj = o, propID = "_MTG_Simplified_UNIFIED"})
-      if not (ptData ~= nil and ptData.displayPowTou) then
+      if not (ptData and ptData ~= nil and ptData.displayPowTou) then
         local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = {0.735, 0.4, 1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = textColor}
         o.createButton(powerToughness)
       end
