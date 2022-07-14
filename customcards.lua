@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.8'
+version = '1.0.9'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -45,8 +45,10 @@ function createButtons(t) --The encoder calls this when
           new_outstring = string.sub(new_outstring, 1, string.len(new_outstring)-1)
           outstring[7] = new_outstring
       end
+	powerTextColor = {r=0, g=0, b=0}
       if o.getVar('invertText')== true then
         textColor = {r=1, g=1, b=1}
+		powerTextColor = {r=1, g=1, b=1}
       else
         textColor = {r=0, g=0, b=0}
       end
@@ -56,8 +58,6 @@ function createButtons(t) --The encoder calls this when
 		titleOffset = {0, 0.4, -1.34}
 		powerOffset = {0.835, 0.4, 1.3}
       else
-        textColor = {r=0, g=0, b=0}
-		powerTextColor = {r=0, g=0, b=0}
 		titleOffset = {0, 0.4, -1.3}
 		powerOffset = {0.735, 0.4, 1.3}
       end
