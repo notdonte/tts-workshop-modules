@@ -50,7 +50,18 @@ function createButtons(t) --The encoder calls this when
       else
         textColor = {r=0, g=0, b=0}
       end
-      local dataTitle = {click_function = "updateButtonLabels", function_owner = o, label = o.getName(), position = {0, 0.4, -1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 125, font_color = textColor}
+	  if o.getVar('isPlaneswalker')== true then
+        textColor = {r=0, g=0, b=0}
+		powerTextColor = {r=1, g=1, b=1}
+		titleOffset = {0, 0.4, -1.34}
+		powerOffset = {0.835, 0.4, 1.3}
+      else
+        textColor = {r=0, g=0, b=0}
+		powerTextColor = {r=0, g=0, b=0}
+		titleOffset = {0, 0.4, -1.3}
+		powerOffset = {0.735, 0.4, 1.3}
+      end
+      local dataTitle = {click_function = "updateButtonLabels", function_owner = o, label = o.getName(), position = titleOffset, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 125, font_color = textColor}
       local dataDescription = {click_function = "updateButtonLabels", function_owner = o, label = outstring[7], position = {0, 0.4, 0.85}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 90, font_color = textColor}
       local typeLine = {click_function = "updateButtonLabels", function_owner = o, label = outstring[3], position = {0, 0.4, 0.275}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 85, font_color = textColor}
       local scryber = {click_function = "recordName", function_owner = self, label = o.getGMNotes(), position = {-0.43, 0.4, 1.43}, scale = {0.5, 0.5, 0.5}, width = 400, height = 80, font_size = 50, font_color = {1,1,1}, color = {0,0,0}}
@@ -68,7 +79,7 @@ function createButtons(t) --The encoder calls this when
       -- fixing to make sure power/toughness doesn't draw over an already-existing power/toughness meter (_MTG_Simplified_UNIFIED)
       local ptData = enc.call("APIobjIsPropEnabled", {obj = o, propID = "_MTG_Simplified_UNIFIED"})
       if not (ptData and ptData ~= nil and ptData.displayPowTou) then
-        local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = {0.735, 0.4, 1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = textColor}
+        local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = powerOffset, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = powerTextColor}
         o.createButton(powerToughness)
       end
 
