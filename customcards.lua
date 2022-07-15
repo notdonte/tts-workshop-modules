@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.10'
+version = '1.0.11'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -61,7 +61,7 @@ function createButtons(t) --The encoder calls this when
 		titleOffset = {0, 0.4, -1.3}
 		powerOffset = {0.735, 0.4, 1.3}
       end
-      local dataTitle = {click_function = "updateButtonLabels", function_owner = o, label = o.getName(), position = {0, 0.4, -1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 125, font_color = textColor}
+      local dataTitle = {click_function = "updateButtonLabels", function_owner = o, label = o.getName(), position = titleOffset, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 125, font_color = textColor}
       local dataDescription = {click_function = "updateButtonLabels", function_owner = o, label = outstring[7], position = {0, 0.4, 0.85}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 90, font_color = textColor}
       local typeLine = {click_function = "updateButtonLabels", function_owner = o, label = outstring[3], position = {0, 0.4, 0.275}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 85, font_color = textColor}
       local scryber = {click_function = "recordName", function_owner = self, label = o.getGMNotes(), position = {-0.43, 0.4, 1.43}, scale = {0.5, 0.5, 0.5}, width = 400, height = 80, font_size = 50, font_color = {1,1,1}, color = {0,0,0}}
