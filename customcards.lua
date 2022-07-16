@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.1.0'
+version = '1.1.1'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -185,7 +185,7 @@ function generateManaDecals(str, obj)
     local posHolder = {0, 0, 0}
     for i,v in ipairs(fManaCosts) do
         if tonumber(v) ~= nil then break end
-        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.45, z = -1.1}
+        posHolder = {x = -0.8 + 0.15 * manaCount, y = 0.64, z = -1.1}
         table.insert(decals, {
             name = "MagiscryptionManaCount",
             url = colorURLs[v] or colorURLs["C"], -- default to colorless icon as fallback
@@ -201,7 +201,7 @@ function generateManaDecals(str, obj)
             click_function = "updateButtonLabels",
             function_owner = self,
             label = fManaCosts[#fManaCosts], -- grabs the last string in fManaCosts, which SHOULD be the colorless cost
-            position = {0.8 - 0.15 * manaCount, 0.45, -1.1},
+            position = {0.8 - 0.15 * manaCount, 0.64, -1.1},
             scale = {0.5, 0.5, 0.5},
             width = 200, height = 200,
             font_size = 125,
