@@ -1,5 +1,5 @@
 pID = "Custom_Cards"
-version = '1.0.12'
+version = '1.0.13'
 UPDATE_URL='https://raw.githubusercontent.com/notdonte/tts-workshop-modules/main/customcards.lua'
 Style={} --can be ignored
 function registerModule() --Register the mod with the encoder.
@@ -89,7 +89,7 @@ function createButtons(t) --The encoder calls this when
       end
       
       if drawPowTou then
-        local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = {0.735, 0.4, 1.3}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = powerTextColor}
+        local powerToughness = {click_function = "updateButtonLabels", function_owner = o, label = outstring[5], position = powerOffset, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, font_size = 100, font_color = powerTextColor}
         o.createButton(powerToughness)
       end
 
